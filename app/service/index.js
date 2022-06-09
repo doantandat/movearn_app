@@ -512,6 +512,22 @@ const updateRunningSession = async (id, body) => {
   const content = await rawResponse.json();
   return content;
 };
+
+const getShoesById = async (id) => {
+  const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
+
+  const rawResponse = await fetch(API_CONST.API_GET_SHOES + '/' + id, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token_access}`,
+    },
+  });
+  const content = await rawResponse.json();
+  console.log('content shoes', content);
+  return content;
+};
+
 export {
   createSession,
   getSession,
@@ -540,5 +556,6 @@ export {
   swap,
   startRunning,
   getRunningSession,
-  updateRunningSession
+  updateRunningSession,
+  getShoesById
 };

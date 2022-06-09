@@ -73,7 +73,7 @@ function Item() {
   const [isPress, setisPress] = useState(false);
   const [reciveUsdt, setReciveUsdt] = useState(0);
   const [modalVisible, setmodalVisible] = useState(false);
-  const [energy, setEnergy] = useState(selector.shoeCurrentWear.energy);
+  const [energy, setEnergy] = useState(2);
   const [timeRun, setTimeRun] = useState(0);
   const [kmhState, setKmhState] = useState(0);
   const refIDss = useRef('');
@@ -117,7 +117,6 @@ function Item() {
                 isScreenCongrats: false,
               }),
             );
-
             navigation.navigate(tabNavigator.TAB_HOME);
           }
         }
@@ -128,24 +127,24 @@ function Item() {
   };
 
   const startRunning = () => {
-    ApiServices.startRunning({shoesId: id})
-      .then(res => {
-        if (res?.data?._id) {
-          setRunId(res?.data?._id);
-          getRunningSession(res?.data?._id);
-        }
-      })
-      .catch(err => {
-        alert(err.message);
-      });
+    if (id) {
+      ApiServices.startRunning({shoesId: id})
+        .then(res => {
+          if (res?.data?._id) {
+            setRunId(res?.data?._id);
+            getRunningSession(res?.data?._id);
+          }
+        })
+        .catch(err => {
+          alert(err.message);
+        });
+    }
   };
 
   const updateRunningSession = async body => {
     ApiServices.updateRunningSession(runId, body)
-      .then(res => {
-        if (res?.data?.status === 'ended') {
-          getRunningSession(runId);
-        }
+      .then(() => {
+        getRunningSession(runId);
       })
       .catch(err => {
         alert(err.message);
@@ -239,6 +238,8 @@ function Item() {
         setCurrentSpeed(speed.toFixed(2));
         setTotalKm(distanceOld => distanceOld + distance);
 
+        updateRunningSession({distance});
+
         const dateNow = Date.now();
         if (!refLocations.current.time) {
           refLocations.current.time = dateNow;
@@ -315,7 +316,7 @@ function Item() {
         } else {
           receivedUSDTt = 0;
         }
-        // CheckSpeed(refIDss.current, vtKmH, receivedUSDTt, min, max, distanceKm);
+        CheckSpeed(refIDss.current, vtKmH, receivedUSDTt, min, max, distanceKm);
         refLocations.current.latitude = latitude;
         refLocations.current.longitude = longitude;
         refLocations.current.time = dateNow;
@@ -417,7 +418,7 @@ function Item() {
   };
 
   const handleStepStop = () => {
-    updateRunningSession({ status: 'ended' });
+    updateRunningSession({status: 'ended'});
   };
 
   return (
