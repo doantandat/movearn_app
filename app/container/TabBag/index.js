@@ -20,6 +20,7 @@ import ItemSneakers from './ItemSneakers';
 import ItemGems from './ItemGems';
 import ItemPromos from './ItemPromos';
 import ItemUpgrade from './ItemUpgrade';
+import ItemShoeBoxes from './ItemShoeboxes';
 import Head from "./../../components/head/index";
 import * as ApiServices from "./../../service/index";
 
@@ -141,7 +142,7 @@ class TabBag extends Component {
 
     _renderItem = ({ item, index }) => {
         const { screenState, getConstShoe } = this.props;
-        const { isSneakers, isGems, isPromos, isGalleryMini, isUpgradeMini } =
+        const { isSneakers, isGems, isPromos, isGalleryMini, isUpgradeMini, isShoeBoxes } =
             screenState;
         const constShoe = getConstShoe.data ? getConstShoe.data : [];
         if (isSneakers && isGalleryMini) {
@@ -162,6 +163,9 @@ class TabBag extends Component {
         }
         if (isGems) {
             return <ItemGems item={item} index={index} />;
+        }
+        if (isShoeBoxes) {
+            return <ItemShoeBoxes item={item} index={index} />;
         }
         if (isPromos) {
             return <ItemPromos item={item} index={index} />;
@@ -336,6 +340,7 @@ class TabBag extends Component {
         } = screenState;
         const { loading } = this.state
         const dataSneakers = shoes.data ? shoes.data : [];
+        const dataShoeBoxes = shoes.data ? shoes.data : [];
         const stylesContent = {
             flex:
                 isAndroid
@@ -383,7 +388,7 @@ class TabBag extends Component {
                                     : isGems
                                         ? dataSneakers
                                         : isShoeBoxes
-                                            ? dataSneakers
+                                            ? dataShoeBoxes
                                             : isPromos
                                                 ? dataPromos
                                                 : []

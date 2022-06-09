@@ -60,4 +60,9 @@ export const API_PASS_CODE_WALLET = `${HOSTWALLET}/movearn_setpasss`;
 export const API_CHECK_PASS_WALLET = `${HOSTWALLET}/movearn_checkPass`;
 
 
-export const API_GET_TOTAL_KM = `${HOST + USER}/total-run`;;
+export const API_GET_TOTAL_KM = `${HOST + USER}/total-run`;
+
+
+//running
+export const API_START_RUNNING= `${HOST}/run`;
+export const API_GET_RUNNING_SESSION= `${HOST}/run`;
