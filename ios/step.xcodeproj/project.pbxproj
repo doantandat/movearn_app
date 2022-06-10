@@ -13,9 +13,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		5EE9851AC4C07B1FD4E2E47E /* libPods-step.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C52056E7ADE0BC350C01C5E7 /* libPods-step.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		C7CB011371EA44F19346B86A /* libPods-step-stepTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B79A500894329BFFE46F33 /* libPods-step-stepTests.a */; };
+		B43A62476FBC73ACEA93EBFB /* libPods-step.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51FA695E17E3189344B93102 /* libPods-step.a */; };
+		E37A34513F8E15D3177E9A62 /* libPods-step-stepTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C3EE7B04584E4CCDDB78D1 /* libPods-step-stepTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,12 +39,12 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = step/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = step/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = step/main.m; sourceTree = "<group>"; };
-		31B79A500894329BFFE46F33 /* libPods-step-stepTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-step-stepTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51FA695E17E3189344B93102 /* libPods-step.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-step.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F6037512FD1803F9A4C2E76 /* Pods-step.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-step.debug.xcconfig"; path = "Target Support Files/Pods-step/Pods-step.debug.xcconfig"; sourceTree = "<group>"; };
+		71C3EE7B04584E4CCDDB78D1 /* libPods-step-stepTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-step-stepTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = step/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A54C18560A99BC39896F68CF /* Pods-step-stepTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-step-stepTests.debug.xcconfig"; path = "Target Support Files/Pods-step-stepTests/Pods-step-stepTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AF56D1E4D8632456CFABD39A /* Pods-step.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-step.release.xcconfig"; path = "Target Support Files/Pods-step/Pods-step.release.xcconfig"; sourceTree = "<group>"; };
-		C52056E7ADE0BC350C01C5E7 /* libPods-step.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-step.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F5E7D11A15C2E895D3092B9A /* Pods-step-stepTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-step-stepTests.release.xcconfig"; path = "Target Support Files/Pods-step-stepTests/Pods-step-stepTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,7 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BA0D29C28090AB10082CAF6 /* Mapbox in Frameworks */,
-				C7CB011371EA44F19346B86A /* libPods-step-stepTests.a in Frameworks */,
+				E37A34513F8E15D3177E9A62 /* libPods-step-stepTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BA0D29B28090AB10082CAF6 /* Mapbox in Frameworks */,
-				5EE9851AC4C07B1FD4E2E47E /* libPods-step.a in Frameworks */,
+				B43A62476FBC73ACEA93EBFB /* libPods-step.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,8 +106,8 @@
 			children = (
 				0B31646D2808571300DA955F /* package.json */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C52056E7ADE0BC350C01C5E7 /* libPods-step.a */,
-				31B79A500894329BFFE46F33 /* libPods-step-stepTests.a */,
+				51FA695E17E3189344B93102 /* libPods-step.a */,
+				71C3EE7B04584E4CCDDB78D1 /* libPods-step-stepTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

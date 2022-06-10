@@ -66,3 +66,14 @@ export const API_GET_TOTAL_KM = `${HOST + USER}/total-run`;
 //running
 export const API_START_RUNNING= `${HOST}/run`;
 export const API_GET_RUNNING_SESSION= `${HOST}/run`;
+
+//box
+export const API_GET_MY_BOX= `${HOST}/item`;
+export const API_GET_BOX_MARKET = `${HOST}/item/market`;
+
+//open Box
+export const API_OPEN_BOX = `${HOST}/item/box/open`;
+
+//buy item
+
+export const API_BUY_ITEM = `${HOST}/item/buy-p2p`;

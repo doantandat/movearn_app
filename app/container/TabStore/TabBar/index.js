@@ -184,15 +184,15 @@ class TabBar extends Component
             Toast.showWithGravity('Coming soon', Toast.LONG, Toast.CENTER);
         }
         if (key === 'ShoeBoxes') {
-            // action.changeScreenState({
-            //     ...screenState,
-            //     isSneakers: false,
-            //     isGems: false,
-            //     isBadges: false,
-            //     isShoeBoxes: true,
-            //     isPromos: false
-            // });
-            Toast.showWithGravity('Coming soon', Toast.LONG, Toast.CENTER);
+            action.changeScreenState({
+                ...screenState,
+                isSneakers: false,
+                isGems: false,
+                isBadges: false,
+                isShoeBoxes: true,
+                isPromos: false
+            });
+            // Toast.showWithGravity('Coming soon', Toast.LONG, Toast.CENTER);
         }
         if (key === 'Promos') {
             // action.changeScreenState({

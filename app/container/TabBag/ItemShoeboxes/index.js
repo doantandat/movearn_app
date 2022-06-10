@@ -13,15 +13,15 @@ import {useDispatch} from 'react-redux';
 import {Colors, getSize} from '../../../common';
 import * as ApiServices from '../../../service';
 import {LoadingIndicator, NoData} from '../../../components';
-import {InfoItemModal} from '../../../components/InfoItemModal';
 import * as ACTION_CONST from '../../../redux/action/ActionType';
+import Video from 'react-native-video';
 
-export default function ItemShoeBoxes({item, index}) {
+export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
-  const [sneaker, setSneaker] = useState(null);
+  // const [sneaker, setSneaker] = useState(null);
 
   const image =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRogMFHOw0CKtwUvuJmhgcSi18GmfqlCxUI6g&usqp=CAU';
@@ -32,8 +32,10 @@ export default function ItemShoeBoxes({item, index}) {
     setLoading(true);
     ApiServices.onOpenBox({item_type: item?.type})
       .then(res => {
-        setLoading(false);
         setSneaker(res?.data?.newShoes);
+        setLoading(false);
+        setOpenVideo(true);
+        console.log('resssss', res);
         ApiServices.getMyBox().then(response => {
           if (response.code === 200) {
             dispatch({
@@ -42,7 +44,6 @@ export default function ItemShoeBoxes({item, index}) {
             });
           }
         });
-
         ApiServices.shoes().then(response => {
           if (response.code === 200) {
             dispatch({
@@ -58,11 +59,13 @@ export default function ItemShoeBoxes({item, index}) {
       });
   };
 
-  useEffect(() => {
-    if (sneaker) {
-      setModalInfo(true);
-    }
-  }, [sneaker]);
+  // useEffect(() => {
+  //   if (sneaker) {
+  //     setTimeout(() => {
+  //       setModalInfo(true);
+  //     }, 5000);
+  //   }
+  // }, [sneaker]);
 
   return (
     <View
@@ -185,10 +188,10 @@ export default function ItemShoeBoxes({item, index}) {
                       backgroundColor: '#565874',
                       paddingHorizontal: getSize.scale(8),
                       paddingVertical: getSize.scale(2),
-                      height: 20
+                      height: 20,
                     }}>
                     <Text
-                    numberOfLines={1}
+                      numberOfLines={1}
                       style={{
                         color: '#fff',
                         fontWeight: 'bold',
@@ -222,12 +225,12 @@ export default function ItemShoeBoxes({item, index}) {
           </View>
         </View>
       </ImageBackground>
-      <InfoItemModal
+      {/* <InfoItemModal
         visible={modalInfo}
         setVisible={values => setModalInfo(values)}
         item={sneaker}
         isSneakerItem
-      />
+      /> */}
     </View>
   );
 }

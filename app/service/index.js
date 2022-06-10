@@ -513,7 +513,7 @@ const updateRunningSession = async (id, body) => {
   return content;
 };
 
-const getShoesById = async (id) => {
+const getShoesById = async id => {
   const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
 
   const rawResponse = await fetch(API_CONST.API_GET_SHOES + '/' + id, {
@@ -525,6 +525,70 @@ const getShoesById = async (id) => {
   });
   const content = await rawResponse.json();
   console.log('content shoes', content);
+  return content;
+};
+
+const getMyBox = async () => {
+  const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
+
+  const rawResponse = await fetch(`${API_CONST.API_GET_MY_BOX}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token_access}`,
+    },
+  });
+  const content = await rawResponse.json();
+  return content;
+};
+
+const onOpenBox = async body => {
+  const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
+  const rawResponse = await fetch(`${API_CONST.API_OPEN_BOX}`, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token_access}`,
+    },
+    body: JSON.stringify(body),
+  });
+  const content = await rawResponse.json();
+  return content;
+};
+
+const getShopBox = async Body => {
+  const params = API_FETCH.getQueryString({
+    pageSize: Body?.pageSize ?? 20,
+    page: Body?.page ?? 1,
+  });
+
+  const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
+  const rawResponse = await fetch(`${API_CONST.API_GET_BOX_MARKET}?${params}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token_access}`,
+    },
+  });
+  const content = await rawResponse.json();
+  return content;
+};
+
+const buyItem = async Body => {
+  const token_access = await storage.getItem(CONST_STORAGE.TOKEN_ACCESS);
+  const body = {
+    sellingId: Body.sellingId,
+    quantity: Body.quantity,
+  };
+  const rawResponse = await fetch(API_CONST.API_BUY_ITEM, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${token_access}`,
+    },
+    body: JSON.stringify(body),
+  });
+  const content = await rawResponse.json();
   return content;
 };
 
@@ -557,5 +621,9 @@ export {
   startRunning,
   getRunningSession,
   updateRunningSession,
-  getShoesById
+  getShoesById,
+  getMyBox,
+  onOpenBox,
+  getShopBox,
+  buyItem
 };
