@@ -171,6 +171,8 @@ class TabBag extends Component {
           isshoesIdWear={this.state.isshoesIdWear}
           constShoe={constShoe}
           ref={this.ModalInfoRef}
+          sellShoe={this.sellShoe}
+          unSellShoe={this.unSellShoe}
         />
       );
     }
@@ -295,6 +297,7 @@ class TabBag extends Component {
       },
     );
   };
+
   putShoe = (isSelling, id) => {
     const {action} = this.props;
     const {price} = this.state;
@@ -348,6 +351,37 @@ class TabBag extends Component {
         action.shoeCurrentWear(element);
       }
     }
+  };
+
+  sellShoe = (id, price) => {
+    ApiServices.onSellShoe(id, {isSelling: true, price: +price})
+      .then(res => {
+        if (res.code === 200) {
+          this.LoadData();
+          alert('Successfully');
+        } else {
+          alert(res?.message ?? 'Somethings went wrong. Please try again');
+        }
+      })
+      .catch(err => {
+        alert(err.message);
+      });
+  };
+
+  unSellShoe = id => {
+    ApiServices.unSellShoe(id, {isSelling: false})
+      .then(res => {
+        console.log('res', res);
+        if (res.code === 200) {
+          this.LoadData();
+          alert('Successfully', res?.message);
+        } else {
+          alert(res?.message ?? 'Somethings went wrong. Please try again');
+        }
+      })
+      .catch(err => {
+        alert(err.message);
+      });
   };
 
   onRefresh = () => {

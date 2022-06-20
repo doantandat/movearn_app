@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   ImageBackground,
@@ -9,18 +9,19 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { useDispatch } from 'react-redux';
-import { Colors, getSize } from '../../../common';
+import {useDispatch} from 'react-redux';
+import {Colors, getSize} from '../../../common';
 import * as ApiServices from '../../../service';
-import { LoadingIndicator, NoData } from '../../../components';
+import {LoadingIndicator, NoData} from '../../../components';
 import * as ACTION_CONST from '../../../redux/action/ActionType';
-import Video from 'react-native-video';
+import { InfoItemModal } from '../../../components/InfoItemModal';
 
-export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker }) {
+export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
+  const [modalInfoBox, setModalInfoBox] = useState(false);
   // const [sneaker, setSneaker] = useState(null);
 
   const image =
@@ -30,7 +31,7 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
 
   const onOpenBox = async () => {
     setLoading(true);
-    ApiServices.onOpenBox({ item_type: item?.type })
+    ApiServices.onOpenBox({item_type: item?.type})
       .then(res => {
         setSneaker(res?.data?.newShoes);
         setLoading(false);
@@ -68,7 +69,8 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
   // }, [sneaker]);
 
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => setModalInfoBox(true)}
       key={index}
       style={{
         width: getSize.Width / 2.09,
@@ -77,7 +79,7 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
         marginVertical: getSize.scale(4),
       }}>
       <ImageBackground
-        source={{ uri: 'ic_tabbag_items' }}
+        source={{uri: 'ic_tabbag_items'}}
         style={{
           width: '100%',
           height: getSize.scale(250),
@@ -100,7 +102,7 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
               position: 'relative',
             }}>
             <ImageBackground
-              source={{ uri: 'ic_head_frame_shoe' }}
+              source={{uri: 'ic_head_frame_shoe'}}
               style={{
                 width: '100%',
                 height: getSize.scale(30),
@@ -160,7 +162,7 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
               </View>
             </ImageBackground>
 
-            <View style={{ flex: 6 }}>
+            <View style={{flex: 6}}>
               <TouchableOpacity
                 disabled
                 style={{
@@ -201,7 +203,7 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
                   </View>
                 </View>
                 <Image
-                  source={{ uri: 'ic_git' }}
+                  source={{uri: 'ic_git'}}
                   style={{
                     flex: 7,
                     width: getSize.scale(105),
@@ -219,17 +221,24 @@ export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker })
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>
-            <View style={{ flex: 1 }} />
+            <View style={{flex: 1}} />
           </View>
         </View>
       </ImageBackground>
+      <InfoItemModal
+        visible={modalInfoBox}
+        setVisible={values => setModalInfoBox(values)}
+        item={item}
+        isShoebox
+        allowSell={true}
+      />
       {/* <InfoItemModal
         visible={modalInfo}
         setVisible={values => setModalInfo(values)}
         item={sneaker}
         isSneakerItem
       /> */}
-    </View>
+    </TouchableOpacity>
   );
 }
 

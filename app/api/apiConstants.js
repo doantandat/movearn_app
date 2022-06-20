@@ -7,7 +7,7 @@ const HOSTWALLET = 'https://us-central1-safaty-e20ba.cloudfunctions.net';
 // __Name Postman
 const AUTH = '/auth';
 const USER = '/user';
-const SHOES = '/shoes';
+export const SHOES = '/shoes';
 const BALANCE = '/balance';
 const RUN = '/run';
 
@@ -25,6 +25,8 @@ export const API_POST_SUBMIT_CHANGE_PASSWORD = `${HOST + USER}/submit-change-pas
 
 // shoes
 export const API_GET_MARKET = `${HOST + SHOES}/market`;
+export const API_SELL_SHOE = `${HOST}/shoes/`;
+
 // export const API_GET_SHOES_ID = `${HOST + SHOES}/shoesId`;
 export const API_GET_SHOES_ID = `${HOST + SHOES}`;
 // export const API_PUT_SHOES_ID = `${HOST + SHOES}/shoesId`;
@@ -77,3 +79,6 @@ export const API_OPEN_BOX = `${HOST}/item/box/open`;
 //buy item
 
 export const API_BUY_ITEM = `${HOST}/item/buy-p2p`;
+
+
+export const API_SELL_ITEM = `${HOST}/item/selling/`;
