@@ -26,6 +26,7 @@ import * as ApiServices from './../../service/index';
 import {DEVICE_HEIGHT, DEVICE_WIDTH} from '../../common/scale';
 import Video from 'react-native-video';
 import {InfoItemModal} from '../../components/InfoItemModal';
+import ItemSelling from './ItemSelling';
 
 const dataPromos = [
   {
@@ -156,6 +157,7 @@ class TabBag extends Component {
       isGalleryMini,
       isUpgradeMini,
       isShoeBoxes,
+      isSelling
     } = screenState;
     const constShoe = getConstShoe.data ? getConstShoe.data : [];
     if (isSneakers && isGalleryMini) {
@@ -194,6 +196,9 @@ class TabBag extends Component {
     }
     if (isPromos) {
       return <ItemPromos item={item} index={index} />;
+    }
+    if (isSelling) {
+      return <ItemSelling item={item} index={index} />;
     }
     return null;
   };
@@ -249,6 +254,15 @@ class TabBag extends Component {
       .then(res => {
         if (res.code === 200) {
           action.getMyListBox(res.data);
+        }
+      })
+      .catch(err => {
+        console.log('LoadData', err);
+      });
+    ApiServices.listSellingItem()
+      .then(res => {
+        if (res.code === 200) {
+          action.getMyListSelling(res.data);
         }
       })
       .catch(err => {
@@ -403,7 +417,7 @@ class TabBag extends Component {
   };
 
   render() {
-    const {navigation, screenState, shoes, myListBox} = this.props;
+    const {navigation, screenState, shoes, myListBox, listSelling} = this.props;
     const {
       isSneakers,
       isGems,
@@ -411,10 +425,13 @@ class TabBag extends Component {
       isPromos,
       isUpgradeMini,
       isGalleryMini,
+      isSelling,
     } = screenState;
     const {loading} = this.state;
     const dataSneakers = shoes.data ? shoes.data : [];
     const dataShoeBoxes = myListBox?.data ?? [];
+    const dataSelling = listSelling?.data ?? [];
+
     const stylesContent = {
       flex: isAndroid ? 0 : !screenState.isSneakers ? 1 / 1.78 : 2 / 1.78,
       minHeight:
@@ -458,7 +475,6 @@ class TabBag extends Component {
         <View style={stylesContent}>
           <TabBar navigation={navigation} />
         </View>
-        {!this.state.openVideo && (
           <>
             {loading ? (
               <LoadingIndicator />
@@ -481,9 +497,11 @@ class TabBag extends Component {
                         ? dataShoeBoxes
                         : isPromos
                         ? dataPromos
+                        : isSelling
+                        ? dataSelling
                         : []
                     }
-                    renderItem={this._renderItem}
+                    renderItem={!this.state.openVideo ? this._renderItem: null}
                     refreshing={this.state.refreshing}
                     onRefresh={this.onRefresh}
                     ListEmptyComponent={() => (
@@ -516,7 +534,6 @@ class TabBag extends Component {
               </View>
             )}
           </>
-        )}
       </SafeAreaView>
     );
   }
@@ -531,6 +548,7 @@ const mapStateToProps = state => ({
   getConstShoe: state.initReducer.getConstShoe,
   userId: state.initReducer.userId,
   myListBox: state.initReducer.myListBox,
+  listSelling: state.initReducer.listSelling,
 });
 const mapDispatchToProps = dispatch => ({
   action: bindActionCreators(_action, dispatch),

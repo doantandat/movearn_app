@@ -16,7 +16,7 @@ import {LoadingIndicator, NoData} from '../../../components';
 import * as ACTION_CONST from '../../../redux/action/ActionType';
 import { InfoItemModal } from '../../../components/InfoItemModal';
 
-export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
+export default function ItemSelling({item, index, setOpenVideo, setSneaker}) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -36,6 +36,7 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
         setSneaker(res?.data?.newShoes);
         setLoading(false);
         setOpenVideo(true);
+        console.log('resssss', res);
         ApiServices.getMyBox().then(response => {
           if (response.code === 200) {
             dispatch({
@@ -210,14 +211,6 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
                     resizeMode: 'contain',
                   }}
                 />
-
-                <TouchableOpacity onPress={onOpenBox} style={styles.open}>
-                  {loading ? (
-                    <LoadingIndicator />
-                  ) : (
-                    <Text style={styles.openText}>OPEN</Text>
-                  )}
-                </TouchableOpacity>
               </TouchableOpacity>
             </View>
             <View style={{flex: 1}} />
@@ -229,14 +222,8 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
         setVisible={values => setModalInfoBox(values)}
         item={item}
         isShoebox
-        allowSell={true}
+        allowUnSell
       />
-      {/* <InfoItemModal
-        visible={modalInfo}
-        setVisible={values => setModalInfo(values)}
-        item={sneaker}
-        isSneakerItem
-      /> */}
     </TouchableOpacity>
   );
 }

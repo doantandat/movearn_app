@@ -41,8 +41,11 @@ import
     LoginActiveCode,
     Recvice,
     Countdown,
-    passcodeBackup
+    passcodeBackup,
+    
 } from '../container';
+
+import Feedback from '../container/Feedback'
 
 const Stack = createNativeStackNavigator();
 
@@ -121,6 +124,7 @@ class MainNavigator extends PureComponent
 
                 <Stack.Screen name={stackNavigator.COUNT_DOWN} component={Countdown} />
                 <Stack.Screen name={stackNavigator.BACKUP_PASS_WALLET} component={passcodeBackup} />
+                <Stack.Screen name={stackNavigator.FEED_BACK} component={Feedback} />
             </Stack.Navigator>
         );
     }

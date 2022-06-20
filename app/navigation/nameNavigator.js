@@ -42,6 +42,7 @@ const stackNavigator = {
     ROFILE_CHANGE_PASS: 'ProfileChangePass',
     PROFILE_CONGRATS: 'ProfileCongrats',
     PROFILE_SHARE: 'ProfileShare',
+    FEED_BACK: 'Feedback',
 
     // Maps
     STEP_MAPS: 'StepMaps',

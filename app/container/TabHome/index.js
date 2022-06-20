@@ -12,6 +12,7 @@ import {
   ScrollView,
   RefreshControl,
   ActivityIndicator,
+  Linking
 } from 'react-native';
 import {stackNavigator, tabNavigator} from '../../navigation/nameNavigator';
 import Tooltip from 'react-native-walkthrough-tooltip';
@@ -1836,6 +1837,9 @@ class TabHome extends Component {
                     alignItems: 'center',
                   }}>
                   <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate(stackNavigator.FEED_BACK)
+                    }
                     style={{
                       justifyContent: 'center',
                       flexDirection: 'row',
@@ -1878,6 +1882,7 @@ class TabHome extends Component {
                     alignItems: 'center',
                   }}>
                   <TouchableOpacity
+                  onPress={() => Linking.openURL('https://docs.movearn.io/')}
                     style={{
                       justifyContent: 'center',
                       flexDirection: 'row',

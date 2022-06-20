@@ -100,4 +100,5 @@ export const InitState = {
     passCodeWallet: { ...StateDefault },
     Totalkm: { ...StateDefault },
     listBox: { ...StateDefault },
+    listSelling: { ...StateDefault },
 };

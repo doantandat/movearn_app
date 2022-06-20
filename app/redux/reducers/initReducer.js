@@ -579,6 +579,11 @@ const initReducer = (state = _state.InitState, action) => {
         ...state,
         listBox: {...state.listBox, ...upSuccess},
       };
+    case ACTION_CONST.GET_LIST_SELLING_ITEMS:
+      return {
+        ...state,
+        listSelling: {...state.listSelling, ...upSuccess},
+      };
     default:
       return state;
   }
