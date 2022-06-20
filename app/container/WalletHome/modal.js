@@ -121,7 +121,7 @@ class PoppupBottom extends Component
                     textAlign: "left",
                     fontSize: 15
                 }}>
-                    Users use the Receive And Transfer function to transfer fund in and out of STEPN, or use the trade functon to Swap GST/GMT to or from SOL/UDSC
+                    Users use the Receive And Transfer function to transfer fund in and out of MOVEARN
                 </Text>
             </View>
         </View>

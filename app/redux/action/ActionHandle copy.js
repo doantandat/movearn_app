@@ -745,7 +745,7 @@ export const getRateBnb = () => (dispatch) =>
     return API_FETCH.apiCode(`${API_CONST.API_GET_RATE_BNB}`, 'GET', body, {})
         .then((res) =>
         {
-            // console.log("res ratettttttttttttt");
+            console.log("res ratettttttttttttt", res);
 
             // const { code, message, data } = res;
             // if (code !== 200) {

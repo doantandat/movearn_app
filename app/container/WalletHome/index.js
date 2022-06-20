@@ -51,8 +51,6 @@ class WalletHome extends Component {
             data1: [
                 { id: 1, Name: "Sneakers", amount: 15 }, { id: 2, Name: "Shoeboxes", amount: 52 }, { id: 2, Name: "Gems", amount: 16 }
             ],
-            data2: [{ name: "SOL", icon: "#000000" }, { name: "MOV", icon: "#d2c402" }, { name: "MOV", icon: "#d2c402" }, { name: "USDT", icon: "blue" }],
-            data3: [{ name: "SOL", icon: "#000000" }, { name: "MOV", icon: "#777777" }, { name: "USDT", icon: "blue" }],
             istop: true,
             viewState: true,
             animationValue: new Animated.Value(60),
@@ -265,22 +263,26 @@ class WalletHome extends Component {
         const { modalMER, isSpending, isWallet, data, data1, istop, viewState
         } = this.state;
         const rate = parseFloat(getRate.data.price);
-        const rateBnb = parseFloat(getRateBnb.data.price);
+        // console.log('getRateBnb issss ', getRateBnb);
+        // const rateBnb = parseFloat(getRateBnb.data.price);
         const _id = userIdBnb.data.address ? userIdBnb.data.address : "";
         // console.log("userIdBnb", userIdBnb)
         const address = _id.length < 15 ? _id : _id.substring(0, 6) + "..." + _id.substring(_id.length - 6, _id.length);
 
         const balanceUseridBNB = userIdBnb.data ? userIdBnb.data : {};
-        const totalBalanceUsd = (balanceUseridBNB.mer * rate) + balanceUseridBNB.bnb * rateBnb;
+        console.log('balanceUseridBNB ', balanceUseridBNB);
+        // console.log(rateBnb, rate);
+        const rateBnb = balanceUseridBNB.priceBnb;
+        const totalBalanceUsd = (balanceUseridBNB.mer * rate) + (balanceUseridBNB.bnb * rateBnb) + (balanceUseridBNB.busd);
         const totalBalancemer = totalBalanceUsd / rate;
         const dataBalance = [
             {
                 name: "MOVS", amount: balanceUseridBNB.mer ? Number(balanceUseridBNB.mer).toFixed(2) : "0", icon: "ic_location"
             },
-            // {
-            //     name: "BNB", amount: balanceUseridBNB.bnb ? Number(balanceUseridBNB.bnb).toFixed(6) : "0", icon: "ic_coin_b"
-            // }
-            // ,
+            {
+                name: "BNB", amount: balanceUseridBNB.bnb ? Number(balanceUseridBNB.bnb).toFixed(6) : "0", icon: "ic_coin_b"
+            }
+            ,
             {
                 name: "BUSD", amount: balanceUseridBNB.busd ? Number(balanceUseridBNB.busd).toFixed(2) : "0", icon: "ic_coin"
             }]
@@ -582,10 +584,10 @@ class WalletHome extends Component {
                                                 alignItems: 'center',
                                                 marginHorizontal: getSize.scale(16)
                                             }}
-                                            onPress={
-                                                () => this.setState({ ...this.state, modalMER: true })
-                                                // navigation.navigate(stackNavigator.WALLET_COIN)
-                                            }>
+                                        // onPress={
+                                        //     () => this.setState({ ...this.state, modalMER: true })
+                                        // }
+                                        >
                                             <View
                                                 style={{
                                                     flexDirection: 'row',
@@ -1083,7 +1085,7 @@ class WalletHome extends Component {
                         this.popupRef = target;
                     }}
                     onTouchOutside={this.onColsePopup}
-                    title={'Solana WALLET'}
+                    title={'Bep20 WALLET'}
                     navigation={navigation}
                     stackNavigator={stackNavigator}
                 />

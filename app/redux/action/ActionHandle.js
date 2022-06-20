@@ -492,7 +492,7 @@ export const getRateBnb = () => (dispatch) =>
     return API_FETCH.apiCode(`${API_CONST.API_GET_RATE_BNB}`, 'GET', body, {})
         .then((res) =>
         {
-            // console.log("res ratettttttttttttt");
+            console.log("res ratettttttttttttt");
 
             // const { code, message, data } = res;
             // if (code !== 200) {
@@ -507,7 +507,7 @@ export const getRateBnb = () => (dispatch) =>
         })
         .catch((err) =>
         {
-            console.log('err', err);
+            console.log('err11111111111111', err);
             dispatch(get_rate_bnb_failure(err));
             return false;
         });

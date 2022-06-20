@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   ImageBackground,
@@ -9,14 +9,14 @@ import {
   View,
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import {useDispatch} from 'react-redux';
-import {Colors, getSize} from '../../../common';
+import { useDispatch } from 'react-redux';
+import { Colors, getSize } from '../../../common';
 import * as ApiServices from '../../../service';
-import {LoadingIndicator, NoData} from '../../../components';
+import { LoadingIndicator, NoData } from '../../../components';
 import * as ACTION_CONST from '../../../redux/action/ActionType';
 import Video from 'react-native-video';
 
-export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
+export default function ItemShoeBoxes({ item, index, setOpenVideo, setSneaker }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
 
   const onOpenBox = async () => {
     setLoading(true);
-    ApiServices.onOpenBox({item_type: item?.type})
+    ApiServices.onOpenBox({ item_type: item?.type })
       .then(res => {
         setSneaker(res?.data?.newShoes);
         setLoading(false);
@@ -77,7 +77,7 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
         marginVertical: getSize.scale(4),
       }}>
       <ImageBackground
-        source={{uri: 'ic_tabbag_items'}}
+        source={{ uri: 'ic_tabbag_items' }}
         style={{
           width: '100%',
           height: getSize.scale(250),
@@ -100,7 +100,7 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
               position: 'relative',
             }}>
             <ImageBackground
-              source={{uri: 'ic_head_frame_shoe'}}
+              source={{ uri: 'ic_head_frame_shoe' }}
               style={{
                 width: '100%',
                 height: getSize.scale(30),
@@ -134,36 +134,33 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
                       marginLeft: getSize.scale(5),
                       flexDirection: 'row',
                     }}>
-                    <Image
-                      source={{uri: 'ic_ray'}}
+                    <Text
                       style={{
-                        width: getSize.scale(12),
-                        height: getSize.scale(12),
-                        resizeMode: 'contain',
-                      }}
-                    />
-                    <Image
-                      source={{uri: 'ic_ray'}}
+                        color: Colors.GREY_DARK,
+                        fontStyle: 'italic',
+                      }}>
+                      Quanity:
+                    </Text>
+                    <View
                       style={{
-                        width: getSize.scale(12),
-                        height: getSize.scale(12),
-                        resizeMode: 'contain',
-                      }}
-                    />
-                    <Image
-                      source={{uri: 'ic_ray'}}
-                      style={{
-                        width: getSize.scale(12),
-                        height: getSize.scale(12),
-                        resizeMode: 'contain',
-                      }}
-                    />
+                        flexDirection: 'row',
+                      }}>
+                      <Text
+                        style={{
+                          fontWeight: '600',
+                          fontStyle: 'italic',
+                          marginHorizontal: getSize.scale(4),
+                          textTransform: 'capitalize',
+                        }}>
+                        {item?.quantity}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
             </ImageBackground>
 
-            <View style={{flex: 6}}>
+            <View style={{ flex: 6 }}>
               <TouchableOpacity
                 disabled
                 style={{
@@ -195,15 +192,16 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
                       style={{
                         color: '#fff',
                         fontWeight: 'bold',
+                        textTransform: 'capitalize',
                         marginLeft: getSize.scale(2),
                         fontSize: getSize.scale(12),
                       }}>
-                      {`# ${item?._id}`}
+                      {item?.type?.split('_').join(' ')}
                     </Text>
                   </View>
                 </View>
                 <Image
-                  source={{uri: 'ic_git'}}
+                  source={{ uri: 'ic_git' }}
                   style={{
                     flex: 7,
                     width: getSize.scale(105),
@@ -221,7 +219,7 @@ export default function ItemShoeBoxes({item, index, setOpenVideo, setSneaker}) {
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>
-            <View style={{flex: 1}} />
+            <View style={{ flex: 1 }} />
           </View>
         </View>
       </ImageBackground>

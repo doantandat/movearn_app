@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,15 +10,15 @@ import {
   Platform,
   TextInput
 } from 'react-native';
-import {getSize, Colors} from '../../../common';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import {stackNavigator} from '../../../navigation/nameNavigator';
+import { getSize, Colors } from '../../../common';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { stackNavigator } from '../../../navigation/nameNavigator';
 import * as _action from '../../../redux/action/ActionHandle';
-import {color} from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import { Button } from '@rneui/base';
 
-export default function ItemShoeBoxes({item, index, buyItem}) {
+export default function ItemShoeBoxes({ item, index, buyItem }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [modalBuy, setmodalBuy] = useState(false);
@@ -43,7 +43,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
         marginBottom: getSize.scale(32),
       }}>
       <ImageBackground
-        source={{uri: 'ic_frame_shoe1'}}
+        source={{ uri: 'ic_frame_shoe1' }}
         style={{
           width: '100%',
           height: getSize.scale(280),
@@ -72,7 +72,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
               position: 'relative',
             }}>
             <ImageBackground
-              source={{uri: 'ic_head_frame_shoe'}}
+              source={{ uri: 'ic_head_frame_shoe' }}
               style={{
                 width: '100%',
                 height: getSize.scale(30),
@@ -80,7 +80,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                 alignItems: 'center',
                 marginTop: getSize.scale(-10),
               }}>
-              <View style={{width: '100%'}}>
+              <View style={{ width: '100%' }}>
                 <View
                   style={{
                     flex: 1,
@@ -98,13 +98,66 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                     }}>
                     {item.classify}
                   </Text>
+                  {/* <View
+                    style={{
+                      // flex: 1,
+                      flexDirection: 'row',
+                      // justifyContent: 'space-between',
+                      // alignItems: 'center',
+                      // backgroundColor: "red",
+                      width: '100%',
+                      // paddingHorizontal: getSize.scale(32)
+                    }}>
+                    <Text
+                      style={{
+                        color: Colors.GREY_DARK,
+                        fontStyle: 'italic',
+                      }}>
+                      Quanity
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                      }}>
+                      <Text
+                        style={{
+                          fontWeight: '600',
+                          fontStyle: 'italic',
+                          marginHorizontal: getSize.scale(4),
+                          textTransform: 'capitalize',
+                        }}>
+                        {item?.quantity}
+                      </Text>
+                    </View>
+                  </View> */}
                   <View
                     style={{
                       marginLeft: getSize.scale(5),
                       flexDirection: 'row',
                     }}>
-                    <Image
-                      source={{uri: 'ic_ray'}}
+                    <Text
+                      style={{
+                        color: Colors.GREY_DARK,
+                        fontStyle: 'italic',
+                      }}>
+                      Quanity:
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                      }}>
+                      <Text
+                        style={{
+                          fontWeight: '600',
+                          fontStyle: 'italic',
+                          marginHorizontal: getSize.scale(4),
+                          textTransform: 'capitalize',
+                        }}>
+                        {item?.quantity}
+                      </Text>
+                    </View>
+                    {/* <Image
+                      source={{ uri: 'ic_ray' }}
                       style={{
                         width: getSize.scale(12),
                         height: getSize.scale(12),
@@ -112,7 +165,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                       }}
                     />
                     <Image
-                      source={{uri: 'ic_ray'}}
+                      source={{ uri: 'ic_ray' }}
                       style={{
                         width: getSize.scale(12),
                         height: getSize.scale(12),
@@ -120,13 +173,13 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                       }}
                     />
                     <Image
-                      source={{uri: 'ic_ray'}}
+                      source={{ uri: 'ic_ray' }}
                       style={{
                         width: getSize.scale(12),
                         height: getSize.scale(12),
                         resizeMode: 'contain',
                       }}
-                    />
+                    /> */}
                   </View>
                 </View>
               </View>
@@ -222,7 +275,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                 </View>
               </View>
             </Modal>
-            <View style={{flex: 6}}>
+            <View style={{ flex: 6 }}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -230,7 +283,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   alignItems: 'center',
                 }}>
                 <Image
-                  source={{uri: 'ic_git'}}
+                  source={{ uri: 'ic_git' }}
                   style={{
                     flex: 8,
                     width: getSize.scale(98),
@@ -260,17 +313,28 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                       style={{
                         color: '#fff',
                         fontWeight: 'bold',
+                        textTransform: 'capitalize',
                         marginLeft: getSize.scale(2),
                         fontSize: getSize.scale(12),
                       }}>
-                      {`# ${item._id}`}
+                      {item?.type?.split('_').join(' ')}
                     </Text>
+
+                    {/* <Text
+                      style={{
+                        fontWeight: '600',
+                        fontStyle: 'italic',
+                        marginHorizontal: getSize.scale(4),
+                        textTransform: 'capitalize',
+                      }}>
+                      {item?.type?.split('_').join(' ')}
+                    </Text> */}
                   </View>
                 </View>
               </TouchableOpacity>
             </View>
 
-            <View style={{flex: 1.5, width: '100%'}}>
+            <View style={{ flex: 1.5, width: '100%' }}>
               <View
                 style={{
                   flex: 1,
@@ -289,10 +353,11 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                       fontWeight: 'bold',
                       fontSize: getSize.scale(12),
                     }}>
-                    11.67 BNB
+                    {/* 11.67 BNB */}
+                    {item.price} BUSD
                   </Text>
                 </View>
-                <View style={{flex: 4}}>
+                <View style={{ flex: 4 }}>
                   <Modal
                     animationType="fade"
                     transparent={true}
@@ -322,7 +387,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                             borderRadius: 50,
                             resizeMode: 'cover',
                           }}
-                          source={{uri: 'ic_congrats_sneakers'}}
+                          source={{ uri: 'ic_congrats_sneakers' }}
                         />
                       </TouchableOpacity>
                     </View>
@@ -393,185 +458,8 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                                 uri: 'ic_git', // item.img
                               }}
                             />
-                            <View
-                              style={{
-                                // flex: 3,
-                                justifyContent: 'space-around',
-                                flexDirection: 'row',
-                                width: '100%',
-                                height: getSize.scale(40),
-                              }}>
-                              <View
-                                style={{
-                                  // flexDirection: '',
-                                  // borderWidth: 1,
-                                  justifyContent: 'flex-start',
-                                  alignItems: 'flex-start',
-                                  borderRadius: 20,
-
-                                  // padding: getSize.scale(2),
-                                  // borderColor: item.color,
-                                  width: '45%',
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#767676',
-                                    fontStyle: 'italic',
-                                  }}>
-                                  ID
-                                </Text>
-                                <ImageBackground
-                                  source={{uri: 'ic_btn_id'}}
-                                  style={{
-                                    width: '100%',
-                                    height: getSize.scale(35),
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-
-                                    // position: "absolute"
-                                  }}>
-                                  <View
-                                    style={{
-                                      // width: getSize.scale(15),
-                                      // height: getSize.scale(15),
-                                      // borderRadius: 50,
-                                      // backgroundColor: item.color,
-                                      justifyContent: 'center',
-                                      alignItems: 'center',
-                                    }}>
-                                    <Text
-                                      style={{
-                                        color: '#fff',
-                                        fontWeight: 'bold',
-                                        fontSize: getSize.scale(15),
-                                      }}>
-                                      #
-                                    </Text>
-                                  </View>
-                                  <Text
-                                    style={{
-                                      color: '#fff',
-                                      fontWeight: 'bold',
-                                      fontSize: getSize.scale(15),
-                                      marginHorizontal: getSize.scale(4),
-                                    }}>
-                                    {item.shoesId}
-                                  </Text>
-                                </ImageBackground>
-                              </View>
-                              <View
-                                style={{
-                                  // flexDirection: 'row',
-                                  // borderWidth: 1,
-                                  justifyContent: 'flex-start',
-                                  alignItems: 'flex-start',
-                                  // borderRadius: 20,
-                                  // flex: 0.5,
-                                  // padding: getSize.scale(2),
-                                  // borderColor: item.color,
-                                  width: '50%',
-                                  // backgroundColor: "red"
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#767676',
-                                    fontStyle: 'italic',
-                                  }}>
-                                  Owner
-                                </Text>
-                                <View
-                                  style={{
-                                    // width: getSize.scale(15),
-                                    // height: getSize.scale(15),
-                                    // borderRadius: 50,
-                                    // backgroundColor: item.color,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: getSize.scale(8),
-                                  }}>
-                                  <Text
-                                    style={{
-                                      color: '#2C2C2C',
-                                      fontWeight: 'bold',
-                                      fontSize: getSize.scale(15),
-                                    }}>
-                                    5pf04xvA...GPoWuY
-                                  </Text>
-                                </View>
-                              </View>
-                            </View>
                           </View>
 
-                          <View
-                            style={{
-                              // flex: 1
-                              justifyContent: 'space-evenly',
-                              alignItems: 'center',
-                              // backgroundColor: Colors.GREEN,
-                              width: '100%',
-                              marginTop:
-                                Platform.OS === 'android'
-                                  ? getSize.scale(28)
-                                  : getSize.scale(20),
-                              borderRadius: 30,
-                              borderWidth: 1,
-                              borderBottomWidth: 2,
-                              borderRightWidth: 2,
-                              borderColor: '#F2F2F2',
-                              height: getSize.scale(70),
-                            }}>
-                            <View
-                              style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                              }}>
-                              {/* <Image
-                                                                style={{
-                                                                    width: 20,
-                                                                    height: 20,
-                                                                    resizeMode: 'cover',
-                                                                    borderRadius: 50
-                                                                }}
-                                                                source={{
-                                                                    uri: image
-                                                                }}
-                                                            /> */}
-                              <Text
-                                style={{
-                                  fontStyle: 'italic',
-                                  fontWeight: '500',
-                                  // marginHorizontal: getSize.scale(8)
-                                }}>
-                                {item.classify}
-                              </Text>
-                              <Text
-                                style={{
-                                  fontStyle: 'italic',
-                                  fontWeight: 'bold',
-                                  marginHorizontal: getSize.scale(8),
-                                }}>
-                                15
-                              </Text>
-                            </View>
-                            <Text
-                              style={{
-                                fontStyle: 'italic',
-                                fontWeight: '500',
-                              }}>
-                              Move at{' '}
-                              <Text
-                                style={{
-                                  fontStyle: 'italic',
-                                  fontWeight: '500',
-                                  color: '#F44369',
-                                }}>
-                                5 - 20 km/h{' '}
-                              </Text>
-                              to earn
-                            </Text>
-                          </View>
 
                           <View
                             style={{
@@ -652,94 +540,6 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                                 </Text>
                               </View>
                             </View>
-                            {/* <View
-                              style={{
-                                // flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                // backgroundColor: "red",
-                                width: '100%',
-                              }}>
-                              <Text
-                                style={{
-                                  color: Colors.GREY_DARK,
-                                  fontStyle: 'italic',
-                                }}>
-                                Level
-                              </Text>
-                              <View
-                                style={{
-                                  flexDirection: 'row',
-                                }}>
-                                <Text
-                                  style={{
-                                    fontWeight: '600',
-                                    fontStyle: 'italic',
-                                  }}>
-                                  {item.level}
-                                </Text>
-                              </View>
-                            </View> */}
-
-                            {/* <View
-                              style={{
-                                // flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                // backgroundColor: "red",
-                                width: '100%',
-                              }}>
-                              <Text
-                                style={{
-                                  color: Colors.GREY_DARK,
-                                  fontStyle: 'italic',
-                                }}>
-                                Durability
-                              </Text>
-                              <View
-                                style={{
-                                  flexDirection: 'row',
-                                }}>
-                                <Text
-                                  style={{
-                                    fontWeight: '600',
-                                    fontStyle: 'italic',
-                                  }}>
-                                  100/100
-                                </Text>
-                              </View>
-                            </View> */}
-                            {/* <View
-                              style={{
-                                // flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                // backgroundColor: "red",
-                                width: '100%',
-                              }}>
-                              <Text
-                                style={{
-                                  color: Colors.GREY_DARK,
-                                  fontStyle: 'italic',
-                                }}>
-                                Shoe mint
-                              </Text>
-                              <View
-                                style={{
-                                  flexDirection: 'row',
-                                }}>
-                                <Text
-                                  style={{
-                                    fontWeight: '600',
-                                    fontStyle: 'italic',
-                                  }}>
-                                  {`${item.mint}/7`}
-                                </Text>
-                              </View>
-                            </View> */}
                             <View
                               style={{
                                 width: '100%',
@@ -747,7 +547,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                                 // backgroundColor: "red",
                               }}>
                               <Image
-                                source={{uri: 'ic_line'}}
+                                source={{ uri: 'ic_line' }}
                                 style={{
                                   width: '100%',
                                   height: getSize.scale(5),
@@ -817,7 +617,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                                   color: '#F44369',
                                   fontSize: getSize.scale(20),
                                 }}>
-                                {`${item.price} MOV`}
+                                {`${item.price} BUSD`}
                               </Text>
                             </View>
                           </View>
@@ -929,7 +729,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                           height: getSize.scale(24),
                           resizeMode: 'contain',
                         }}
-                        source={{uri: 'ic_btn_buy'}}
+                        source={{ uri: 'ic_btn_buy' }}
                       />
                     </TouchableOpacity>
                     {/* <TouchableOpacity
@@ -1036,7 +836,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                     flexDirection: 'row',
                     width: '100%',
                   }}>
-                  <View style={{flex: 1}}>
+                  <View style={{ flex: 1 }}>
                     <Text
                       style={{
                         color: '#767676',
@@ -1075,7 +875,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                     </View>
                   </View>
 
-                  <View style={{flex: 1}}>
+                  <View style={{ flex: 1 }}>
                     <Text
                       style={{
                         color: '#767676',
@@ -1112,7 +912,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   alignItems: 'center',
                   marginTop: getSize.scale(8),
                 }}>
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Text
                     style={{
                       color: '#767676',
@@ -1142,7 +942,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   </View>
                 </View>
 
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Text
                     style={{
                       color: '#767676',
@@ -1172,7 +972,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   </View>
                 </View>
 
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Text
                     style={{
                       color: '#767676',
@@ -1214,7 +1014,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
-                  <View style={{flex: 1}} />
+                  <View style={{ flex: 1 }} />
                   <View
                     style={{
                       flex: 2,
@@ -1417,7 +1217,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   width: '100%',
                   paddingVertical: getSize.scale(5),
                 }}>
-                <View style={{justifyContent: 'center'}}>
+                <View style={{ justifyContent: 'center' }}>
                   <Text
                     style={{
                       color: Colors.GREY_DARK,
@@ -1436,7 +1236,7 @@ export default function ItemShoeBoxes({item, index, buyItem}) {
                   </Text>
                 </View>
 
-                <View style={{justifyContent: 'center'}}>
+                <View style={{ justifyContent: 'center' }}>
                   <TouchableOpacity
                     onPress={() => setmodalTransfer(!modalTransfer)}>
                     <Image

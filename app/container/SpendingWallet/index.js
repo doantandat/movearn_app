@@ -592,7 +592,7 @@ class Wallet extends Component {
                 <PoupBottom
                     ref={(target) => { this.popupBotomRef = target }}
                     onTouchOutside={this.onColsePopupBottom}
-                    title={"Solana WALLET"}
+                    title={"Bep20 WALLET"}
                     navigation={navigation}
                     stackNavigator={stackNavigator}
                 />

@@ -72,18 +72,19 @@ export const InfoItemModal = React.memo<Props>(
                 <Image
                   style={{
                     height: getSize.Width / 1.8,
-                    width: 110,
+                    // width: 110,
+                    width: getSize.Width - (getSize.Width * 0.2),
                     resizeMode: 'contain',
                     marginVertical: getSize.scale(8),
                   }}
                   source={{
                     uri: isGemItem ? 'ic_tree_coin' : item?.img, // item?.img
                   }}
-                  source={
-                    isGemItem
-                      ? require('../../assets/images/gem1.png')
-                      : { uri: item?.img }
-                  }
+                  // source={
+                  //   isGemItem
+                  //     ? require('../../assets/images/gem1.png')
+                  //     : { uri: item?.img }
+                  // }
                 />
                 <View
                   style={{
@@ -373,7 +374,7 @@ export const InfoItemModal = React.memo<Props>(
                       </View>
                     </View>
 
-                    <View
+                    {/* <View
                       style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -408,11 +409,10 @@ export const InfoItemModal = React.memo<Props>(
                             fontWeight: 'bold',
                             color: '#000000',
                           }}>
-                          {/* {`${constShoe?.LUCK[item?.quality]}`} */}
                           {item?.attributes?.luck}
                         </Text>
                       </View>
-                    </View>
+                    </View> */}
                   </View>
                 )}
                 {isGemItem && (
