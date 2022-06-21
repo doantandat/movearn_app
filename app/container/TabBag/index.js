@@ -385,7 +385,6 @@ class TabBag extends Component {
   unSellShoe = id => {
     ApiServices.unSellShoe(id, {isSelling: false})
       .then(res => {
-        console.log('res', res);
         if (res.code === 200) {
           this.LoadData();
           alert('Successfully', res?.message);

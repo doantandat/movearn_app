@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  Platform,
   SafeAreaView,
   TouchableOpacity,
   ImageBackground,
@@ -12,13 +11,14 @@ import {
   ScrollView,
   RefreshControl,
   ActivityIndicator,
-  Linking
+  Linking,
 } from 'react-native';
 import {stackNavigator, tabNavigator} from '../../navigation/nameNavigator';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as _action from '../../redux/action/ActionHandle';
+import {Button} from '@rneui/base';
 
 import Head from './../../components/head/index';
 import {location, getSize, Colors} from '../../common/';
@@ -43,6 +43,8 @@ class TabHome extends Component {
       isPutShoe: false,
       isshoesIdWear: false,
       isShowModalInstruction: true,
+      modalPrice: false,
+      priceTxt: '',
     };
   }
 
@@ -268,6 +270,38 @@ class TabHome extends Component {
         }
       });
   };
+
+  sellShoe = (id, price) => {
+    ApiServices.onSellShoe(id, {isSelling: true, price})
+      .then(res => {
+        this.setState({priceTxt: ''});
+        if (res.code === 200) {
+          this.LoadData();
+          alert('Successfully');
+        } else {
+          alert(res?.message ?? 'Somethings went wrong. Please try again');
+        }
+      })
+      .catch(err => {
+        alert(err.message);
+      });
+  };
+
+  unSellShoe = id => {
+    ApiServices.unSellShoe(id, {isSelling: false})
+      .then(res => {
+        if (res.code === 200) {
+          this.LoadData();
+          alert('Successfully', res?.message);
+        } else {
+          alert(res?.message ?? 'Somethings went wrong. Please try again');
+        }
+      })
+      .catch(err => {
+        alert(err.message);
+      });
+  };
+
 
   render() {
     const {
@@ -914,6 +948,100 @@ class TabHome extends Component {
                               position: 'absolute',
                               backgroundColor: '#000000bf',
                             }}></View>
+                          <Modal
+                            animationType="fade"
+                            transparent={true}
+                            visible={this.state.modalPrice}
+                            onRequestClose={() =>
+                              this.setState({modalPrice: false})
+                            }>
+                            <View
+                              style={{
+                                height: '100%',
+                                width: '100%',
+                                top: 0,
+                                position: 'absolute',
+                                backgroundColor: '#000000bf',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}>
+                              <View
+                                style={{
+                                  backgroundColor: 'white',
+                                  width: '80%',
+                                  height: 150,
+                                  borderRadius: 10,
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                }}>
+                                <TextInput
+                                  placeholder="Price"
+                                  keyboardType="numeric"
+                                  onChangeText={text =>
+                                    this.setState({priceTxt: text})
+                                  }
+                                  value={this.state.priceTxt}
+                                  style={{
+                                    padding: 5,
+                                    height: 40,
+                                    borderRadius: 8,
+                                    borderColor: '#565874',
+                                    borderWidth: 1,
+                                    width: '90%',
+                                  }}
+                                />
+                                <View
+                                  style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-around',
+                                    width: '90%',
+                                    marginTop: 15,
+                                  }}>
+                                  <Button
+                                    onPress={() =>
+                                      this.setState({modalPrice: false})
+                                    }
+                                    buttonStyle={{
+                                      backgroundColor: 'white',
+                                      borderWidth: 1,
+                                      borderRadius: 20,
+                                      width: 100,
+                                    }}
+                                    title="Cancel"
+                                    titleStyle={{
+                                      color: 'black',
+                                      fontWeight: 'bold',
+                                      fontSize: 15,
+                                    }}
+                                  />
+                                  <Button
+                                    buttonStyle={{
+                                      backgroundColor: '#3EF1F2',
+                                      borderRadius: 20,
+                                      width: 100,
+                                    }}
+                                    onPress={() => {
+                                      this.sellShoe(
+                                        item?._id,
+                                        this.state.priceTxt,
+                                      );
+                                      this.setState({modalPrice: false});
+                                      this.setState({modalBuy: false});
+                                    }}
+                                    disabled={
+                                      this.state.priceTxt.length ? false : true
+                                    }
+                                    title="Confirm"
+                                    titleStyle={{
+                                      color: 'white',
+                                      fontWeight: 'bold',
+                                      fontSize: 15,
+                                    }}
+                                  />
+                                </View>
+                              </View>
+                            </View>
+                          </Modal>
                           <TouchableOpacity
                             // onPress={() => setmodalTransfer(!modalTransfer)}
                             activeOpacity={1}
@@ -1500,7 +1628,8 @@ class TabHome extends Component {
                                   <TouchableOpacity
                                     disabled={item.isSelling ? true : false}
                                     onPress={() => {
-                                      this.setmodalBuy(item.readableId);
+                                      // this.setmodalBuy(item.readableId);
+                                      this.setState({modalPrice: true});
                                     }}
                                     style={{
                                       width: getSize.Width * 0.3,
@@ -1539,7 +1668,7 @@ class TabHome extends Component {
                                   <TouchableOpacity
                                     disabled={item.isSelling ? false : true}
                                     onPress={() => {
-                                      this.putShoe(!item.isSelling, item._id);
+                                      this.unSellShoe(item._id);
                                     }}
                                     style={{
                                       width: getSize.Width * 0.3,
@@ -1882,7 +2011,7 @@ class TabHome extends Component {
                     alignItems: 'center',
                   }}>
                   <TouchableOpacity
-                  onPress={() => Linking.openURL('https://docs.movearn.io/')}
+                    onPress={() => Linking.openURL('https://docs.movearn.io/')}
                     style={{
                       justifyContent: 'center',
                       flexDirection: 'row',
